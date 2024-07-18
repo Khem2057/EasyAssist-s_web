@@ -18,10 +18,16 @@ return new class extends Migration
             $table->string('contact');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('image')->default(null);
+            $table->string('file')->default(null);
             $table->integer('status')->default(0);
+            $table->boolean('is_verified')->default(0);
+            // $table->timestamp('email_verified_at')->nullable();
+            // $table->rememberToken();
             $table->timestamps();
 
         });
+
     }
 
     /**

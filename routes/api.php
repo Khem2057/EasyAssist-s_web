@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DataController;
+use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\api\BookingController;
+use App\Http\Controllers\api\WorkerController;
+use Illuminate\Support\Facades\Mail;
 
 
 Route::get('/user', function (Request $request) {
@@ -14,6 +18,11 @@ Route::get('/user', function (Request $request) {
 Route::controller(AuthController::class)->group(function() {
     Route::post('login', 'login');
     Route::post('register', 'register');
+    Route::post('logout','logout')->middleware('auth:sanctum');
+    Route::post('forgotPassword','forgotPassword');
+    Route::post('resendOtp', 'resendOtp');
+    Route::post('resetpassword','resetpassword');
+    Route::post('verifiedOtp', 'verifiedOtp');
 });
 
 // Route::post('login', [AuthController::class, 'login']);
@@ -21,6 +30,10 @@ Route::controller(AuthController::class)->group(function() {
 
 // Route::get('data',[AuthController::class, 'getData']);
 
-Route::get('getdata', [DataController::class, 'index']);  // for getting all table's data
-Route::post('bookingservice', [DataController::class, 'booking_store']);   // for booking service 
-Route::get('editprofile', [DataController::class, 'editProfile']);
+Route::controller(DataController::class)->middleware('auth:sanctum')->group(function(){
+    Route::get('getdata', 'index');
+});
+// Route::get('getdata', [DataController::class, 'index'])->middleware('auth:sanctum');  // for getting all table's data
+Route::post('bookingservice', [BookingController::class, 'booking_store'])->middleware('auth:sanctum');   // for booking service 
+Route::post('editprofile', [ProfileController::class, 'editProfile'])->middleware('auth:sanctum');
+Route::post('appliedForWorkers/{id}', [WorkerController::class, 'applyForWorker'])->middleware('auth:sanctum');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('mobile_user_id');
             $table->unsignedBigInteger('service_id');
             $table->string('address');
-            $table->string('description');
+            $table->text('description');
             $table->date('service_time');
             $table->string('image');
             $table->decimal('latitude', 10, 8);

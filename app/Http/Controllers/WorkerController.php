@@ -64,10 +64,10 @@ class WorkerController extends Controller
         $mobileuser->status = "1";
         $result = $mobileuser->update();
         if($result){
-            Session::flash('success', 'Updated successfully');
+            Session::flash('success', 'Approved user successfully');
         }
         else{
-            Session::flash('error', 'failed to update');
+            Session::flash('error', 'Failed to update');
         }
         return redirect()->route('newrequestworker');
     }

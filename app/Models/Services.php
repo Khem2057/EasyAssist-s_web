@@ -13,5 +13,7 @@ class Services extends Model
         'name',
         'description',
         'price',
+        'icon',
+        'image',
     ];
 }

@@ -9,8 +9,10 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\MobileUserController;
 use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\ProductController;
 
 use App\Models\booking;
+use App\Models\Products;
 use PHPUnit\Architecture\Services\ServiceContainer;
 
 Route::get('/', function () {
@@ -55,6 +57,8 @@ Route::middleware('auth','verified')->group(function(){
     Route::get('/adminuser/delete/{id}', [AdminUserController::class, 'delete']);
     Route::get('/addadminpage', [AdminUserController::class, 'addadminpage'])->name('addadminpage');
     Route::post('/addadmin', [AdminUserController::class, 'addadmin']);
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products');
 
 });
 
