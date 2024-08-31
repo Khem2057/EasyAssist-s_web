@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\HasApiTokens;
 use App\models\MobileUsers;
 use App\Models\EmailVerification;
 use Carbon\Carbon;
@@ -67,30 +68,44 @@ class AuthController extends Controller
     }
 
 
-    public function login(LoginRequest $request){
-        $credentials = $request->only('email', 'password');
-        // dd($credentials);
-        if(Auth::guard('mobile')->attempt($credentials)){
-            // $mobile_users = Auth::MobileUsers();
-            $mobile_users = Auth::guard('mobile')->user();
+    // public function login(LoginRequest $request){
+    //     $credentials = $request->only('email', 'password');
+    //     // dd($credentials);
+    //     if(Auth::guard('mobile')->attempt($credentials)){
+    //         // $mobile_users = Auth::MobileUsers();
+    //         $mobile_users = Auth::guard('mobile')->user();
 
-            $success['token'] = $mobile_users->createToken('token')->plainTextToken;
-            $success['name'] = $mobile_users->name;
+    //         $success['token'] = $mobile_users->createToken('Personal Access Token')->plainTextToken;
+    //         $success['name'] = $mobile_users->name;
     
-            $response = [
-                'success' => true,
-                'data' => $success,
-                'message' => 'User login successfully'
-            ];
-            return response() -> json($response, 200);
-        }else{
-            $response = [
-                'success' =>false,
-                'message' =>'Unauthorized'
-            ];
-            return response()->json($response,401);
-        }
+    //         $response = [
+    //             'success' => true,
+    //             'data' => $success,
+    //             'message' => 'User login successfully'
+    //         ];
+    //         return response() -> json($response, 200);
+    //     }else{
+    //         $response = [
+    //             'success' =>false,
+    //             'message' =>'Unauthorized'
+    //         ];
+    //         return response()->json($response,401);
+    //     }
+    // }
+
+    public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+        $token = $user->createToken('MyAppToken')->plainTextToken;
+
+        return response()->json(['token' => $token], 200);
+    } else {
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
+}
 
 
     // public function getData(){

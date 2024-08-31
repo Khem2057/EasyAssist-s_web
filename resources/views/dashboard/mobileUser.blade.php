@@ -60,6 +60,7 @@ table {
                     <th>Address</th>
                     <th>Contact</th>
                     <th>Email</th>
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -71,6 +72,7 @@ table {
                     <td>{{$cmu->address}}</td>
                     <td>{{$cmu->contact}}</td>
                     <td>{{$cmu->email}}</td>
+                    <td><img src="{{asset('storage/'.$cmu->image)}}" alt="Images" height="50px" width="100px" style="object-fit:cover"></td>
                     <td><a href="/mobileuser/delete/{{$cmu->id}}'">Delete</a></td>
                 </tr>
                 @endforeach

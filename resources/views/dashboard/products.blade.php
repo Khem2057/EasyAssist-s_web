@@ -60,7 +60,7 @@ tr:nth-child(even) {
             </p><br>
         </div>
         <div style="margin-left:80%; ">
-            <a class="addbtn" href="{{ route('addservicepage') }}">Add new</a>
+            <a class="addbtn" href="{{ route('addproductpage') }}">Add new</a>
         </div>
     </div>
 

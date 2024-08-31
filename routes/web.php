@@ -59,7 +59,7 @@ Route::middleware('auth','verified')->group(function(){
     Route::post('/addadmin', [AdminUserController::class, 'addadmin']);
 
     Route::get('/products', [ProductController::class, 'index'])->name('products');
-
+    Route::get('/addproductpage', [ProductController::class, 'addproduct'])->name('addproductpage');
 });
 
 

@@ -33,7 +33,8 @@ Route::controller(AuthController::class)->group(function() {
 Route::controller(DataController::class)->middleware('auth:sanctum')->group(function(){
     Route::get('getdata', 'index');
 });
-// Route::get('getdata', [DataController::class, 'index'])->middleware('auth:sanctum');  // for getting all table's data
+
+Route::get('getdata', [DataController::class, 'index']);// for getting all table's data
 Route::post('bookingservice', [BookingController::class, 'booking_store'])->middleware('auth:sanctum');   // for booking service 
-Route::post('editprofile', [ProfileController::class, 'editProfile'])->middleware('auth:sanctum');
+Route::post('editprofile', [ProfileController::class, 'editProfile']);
 Route::post('appliedForWorkers/{id}', [WorkerController::class, 'applyForWorker'])->middleware('auth:sanctum');

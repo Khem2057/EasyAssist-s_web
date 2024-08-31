@@ -67,6 +67,7 @@ table {
                     <th>Address</th>
                     <th>Contact</th>
                     <th>Email</th>
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -78,6 +79,7 @@ table {
                     <td>{{$wmu->address}}</td>
                     <td>{{$wmu->contact}}</td>
                     <td>{{$wmu->email}}</td>
+                    <td><img src="{{asset('storage/'.$wmu->image)}}" alt="Images" height="50px" width="100px" style="object-fit:cover"></td>
                     <td><a href="/workers/delete/{{$wmu->id}}" > &nbsp;Delete</a> 
                             <form class="fm" action="{{url('/makeclient',$wmu->id)}}" method="post">
                                 @csrf

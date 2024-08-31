@@ -71,6 +71,8 @@ tr:nth-child(even) {
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Icon</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -81,6 +83,10 @@ tr:nth-child(even) {
                 <td>{{$srvs->name}}</td>
                 <td>{{$srvs->description}}</td>
                 <td>{{$srvs->price}}</td>
+                <!-- <td>{{$srvs->icon}}</td> -->
+                <td><img src="{{asset('storage/'.$srvs->icon)}}" alt="Icon" height="50px" width="50px" style="object-fit:cover"></td>
+                <td><img src="{{asset('storage/'.$srvs->image)}}" alt="Images" height="50px" width="100px" style="object-fit:cover"></td>
+                
                 <td><a href="/services/delete/{{$srvs->id}}">Delete</a></td>
             </tr>
             @endforeach

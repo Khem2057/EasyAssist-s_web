@@ -50,7 +50,16 @@
         <label class="form-label">Price</label>
         <input type="number" class="form-control" name="price"  placeholder="Enter price of service" required>
     </div><br>
-   
+
+    <div class="mb-2">
+        <label for="formFile" class="form-label">Select Icon</label>
+        <input class="form-control" type="file" id="formFile" name="icon">
+    </div>
+    <div class="mb-2">
+        <label for="formFile" class="form-label">Select Image</label>
+        <input class="form-control" type="file" id="formFile" name="img">
+    </div>
+
     <button type="submit" class="btn btn-primary" style=" width:30%; margin-left:35%; margin-right:35%;">Submit</button>
     </form>
     </div>

@@ -58,8 +58,7 @@ table {
                     <th>Description</th>
                     <th>Service Time</th>
                     <th>Image</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -73,8 +72,7 @@ table {
                     <td>{{$bkng->description}}</td>
                     <td>{{$bkng->service_time}}</td>
                     <td>{{$bkng->image}}</td>
-                    <td>{{$bkng->latitude}}</td>
-                    <td>{{$bkng->longitude}}</td>
+                    <td>{{$bkng->status}}</td>
                     <td><a href="/mobileuser/delete/{{$bkng->id}}">Delete</a></td>
                 </tr>
                 @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\MobileUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -15,7 +16,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'contact' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:mobile_users,email,'
+            'email' => 'required|string|email|max:255'
         ]);
 
         if($validator->fails()){
@@ -36,8 +37,26 @@ class ProfileController extends Controller
                 return response()->json($response, 404);
             }
 
-            $mobileUser->update($request->only(['name', 'address', 'contact', 'email','image']));
+            if ($request->hasFile('image')) {
+                // Delete the old image if it exists
+                if ($mobileUser->image) {
+                    Storage::delete($mobileUser->image);
+                }
+        
+                // Store the new image
+                // $imagePath = $request->file('image')->store('images');
 
+                $image = $request->file('image')->getClientOriginalName();
+                $path = $request->file('image')->storeAs('service', $image, 'public');
+                $mobileUser->image = $path;
+        
+                // Update the image path in the database
+                // $mobileUser->image = $imagePath;
+            }
+            $mobileUser->save();
+
+            $mobileUser->update($request->only(['name', 'address', 'contact', 'email']));
+            
 
             $response = [
                 'success' => true,

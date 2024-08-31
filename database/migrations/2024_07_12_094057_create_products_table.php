@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->Integer('price');
-            $table->string('category');
+            $table->unsignedBigInteger('category');
+            // $table->string('category');
             $table->string('image');
             $table->timestamps();
+
+            $table->foreign('category')->references('id')->on('category');
         });
     }
 

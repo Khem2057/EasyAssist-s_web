@@ -23,7 +23,20 @@ class ServicesController extends Controller
         $service->name = $request->name;
         $service->description = $request->description;
         $service->price = $request->price;
+        if ($request->hasFile('icon')) {
+            // dd('hetre');
+            $image = $request->file('icon')->getClientOriginalName();
+            $path = $request->file('icon')->storeAs('service', $image, 'public');
+            $service->icon = $path;
+        }
+        if ($request->hasFile('img')) {
+            // dd('hetre');
+            $image = $request->file('img')->getClientOriginalName();
+            $path = $request->file('img')->storeAs('service', $image, 'public');
+            $service->image = $path;
+        }
         $result = $service->save();
+        
         if($result){
             Session::flash('success', 'Added service successfully');
         }
